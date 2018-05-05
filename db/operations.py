@@ -1,29 +1,43 @@
 # -*- coding: utf-8 -*-
-from db.models import Training
+from db.models import OfferedTraining, SuggestedTraining
 from db.manager import SQLManager
-from pprint import pprint
-from datetime import datetime
-from datetime.datetime import utcnow
 
 
-def getTraining():
+def get_offered_trainings():
     session = SQLManager().get_session()
-    response = session.query(Training).all()
+    response = session.query(OfferedTraining).all()
     session.close()
     return response
 
 
-def insertTraining(suggestion, team):
+def get_suggested_trainings():
     session = SQLManager().get_session()
-    msg = Training(suggestion, team)
+    response = session.query(SuggestedTraining).all()
+    session.close()
+    return response
+
+
+def insert_suggested_training(user, team, suggestion):
+    session = SQLManager().get_session()
+    msg = OfferedTraining(user, team, suggestion)
+    session.add(msg)
+    session.commit()
+    session.close()
+
+
+def insert_offered_training(user, team, suggestion):
+    session = SQLManager().get_session()
+    msg = SuggestedTraining(user, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()
 
 
 if __name__ == '__main__':
-    insertTraining("c#", "devops")
-    x = getTraining()
+    insert_suggested_training("Igor Bragaia", "c#", "devops")
+    insert_offered_training("Igor Bragaia", "c#", "devops")
+    x = get_offered_trainings()
+    x = get_suggested_trainings()
 
     from pprint import pprint
     pprint(x)
