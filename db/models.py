@@ -20,5 +20,5 @@ class Training(Base):
         self.team = team
 
     def __repr__(self):
-        return "{0}, team {1}".format(self.suggestion, self.team)
+        return "training {0} from {1}".format(self.suggestion, self.team)
 
