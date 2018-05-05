@@ -18,4 +18,4 @@ def insertTraining(suggestion, team):
 
 
 if __name__ == '__main__':
-    insertTraining("c++", "devops")
+    insertTraining("c#", "devops")
