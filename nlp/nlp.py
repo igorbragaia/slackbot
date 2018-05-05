@@ -27,9 +27,13 @@ class NLP:
             documents['documents'].append(aux)
 
         response = requests.post(cls.key_phrase_api_url, headers=cls.headers, json=documents)
-        key_phrases = response.json()
+        key_phrases = response.json()['documents']
 
-        return key_phrases
+        my_list = []
+        for obj in key_phrases:
+            my_list.append(obj['keyPhrases'])
+
+        return my_list
 
     @classmethod
     def get_sentiments(cls, data):
@@ -53,14 +57,14 @@ class NLP:
 # The entire vector is counted just as one request! Be careful to not do to many requests!
 # Try to use as many strings in one vector as possible, and not vector with just one string
 
-documents = [
-  'Ruby on Rails',
-  'Quero aprender Python3',
-  'C++ como linguagem',
-  'Queria aprender liderança',
-  'React Native',
-  'Elixir Day Quero Educacao',
-]
-
-key_phrases = NLP.get_key_phrases(documents)
-pprint(key_phrases)
+# documents = [
+#   'Ruby on Rails',
+#   'Quero aprender Python3',
+#   'C++ como linguagem',
+#   'Queria aprender liderança, processamento de sinais e análise de dados',
+#   'React Native',
+#   'Elixir Day Quero Educacao',
+# ]
+#
+# key_phrases = NLP.get_key_phrases(documents)
+# pprint(key_phrases)
