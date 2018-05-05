@@ -40,15 +40,15 @@ def handle_command(command, channel):
         Executes bot command if the command is known
     """
     # Default response is help text for the user
-    default_response = "Não entendi o que você disse"
+    default_response = "Nao entendi o que voce disse..."
 
     # Finds and executes the given command, filling in response
     response = None
     # This is where you start to implement more commands!
-    if command.startswith(quero_treinar):
-        response = "Então você quer dar um treinamento? Que legal da sua parte!"
-    if command.startswith(quero_treinamento):
-	response = "Saquei, então vocẽ quer um treinamento!"
+    if command.startswith("quero_treinar"):
+        response = "Entao voce quer dar um treinamento? Que legal da sua parte!"
+    if command.startswith("quero_treinamento"):
+	response = "Saquei, entao voce quer um treinamento!"
 
     # Sends the response back to the channel
     slack_client.api_call(
