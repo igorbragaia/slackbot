@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from db.models import OfferedTraining, SuggestedTraining, User
+from db.models import OfferedTraining, RequestedTraining, User
 from db.manager import SQLManager
 from pprint import pprint
 
@@ -53,30 +53,30 @@ def get_unique_offered_trainings_with_quantity():
 
 def get_requested_trainings():
     session = SQLManager().get_session()
-    response = session.query(SuggestedTraining).all()
+    response = session.query(RequestedTraining).all()
     session.close()
     return response
 
 
 def get_unique_requested_trainings():
     session = SQLManager().get_session()
-    response = session.query(SuggestedTraining).all()
+    response = session.query(RequestedTraining).all()
     session.close()
     unique = set([item.suggestion for item in response])
     return unique
 
 
-def insert_requested_trainings(user, team, suggestion):
+def insert_requested_trainings(id_slack, team, suggestion):
     session = SQLManager().get_session()
-    msg = OfferedTraining(user, team, suggestion)
+    msg = OfferedTraining(id_slack, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()
 
 
-def insert_offered_trainings(user, team, suggestion):
+def insert_offered_trainings(id_slack, team, suggestion):
     session = SQLManager().get_session()
-    msg = SuggestedTraining(user, team, suggestion)
+    msg = RequestedTraining(id_slack, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()
@@ -100,10 +100,10 @@ def get_user(id_slack):
     session = SQLManager().get_session()
     response = session.query(User).filter_by(id_slack=id_slack).first()
     session.close()
-    if response is None:
-        return False
+    if response is not None:
+        return response.team
     else:
-        return True
+        return None
 
 
 if __name__ == '__main__':

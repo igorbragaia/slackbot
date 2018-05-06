@@ -11,7 +11,8 @@ class QueroTreinar:
         self.slack_client = slack_client
         self.parser = parser
 
-    def run(self, string_array, channel):
+
+    def run(self, string_array, channel, team, id_slack):
         string_to_match = self.call_strings_from_db()  # call from db
 
         for key_str in string_array:
@@ -38,15 +39,14 @@ class QueroTreinar:
                 channel=channel,
                 text=response
             )
-            self.add_string_to_quero_treinar_db(response_str)
+
+            insert_offered_trainings(id_slack, team, response_str)
+
             print("Added values to db")
 
     def call_strings_from_db(self):
         return get_unique_offered_trainings()
 
-    def add_string_to_quero_treinar_db(self, new_str):
-        insert_offered_trainings("test", "oiii", new_str)
-        pass
 
     def loop_to_quero_treinar_response(self, command, key_str, best_string):
         if command == "y":

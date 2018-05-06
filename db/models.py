@@ -10,7 +10,7 @@ Base = declarative_base()
 class OfferedTraining(Base):
     __tablename__ = "offeredtraining"
     id = Column(Integer, primary_key=True)
-    user = Column(Unicode(), unique=False, nullable=True)
+    id_slack = Column(Unicode(), unique=False, nullable=True)
     team = Column(Unicode(), unique=False, nullable=True)
     suggestion = Column(Unicode(), unique=False, nullable=True)
     date = Column(DateTime(timezone=True), unique=False, nullable=True)
@@ -26,10 +26,10 @@ class OfferedTraining(Base):
         # return "offered training {0} from {1}".format(self.suggestion, self.team)
 
 
-class SuggestedTraining(Base):
-    __tablename__ = "suggestedtraining"
+class RequestedTraining(Base):
+    __tablename__ = "requestedtraining"
     id = Column(Integer, primary_key=True)
-    user = Column(Unicode(), unique=False, nullable=True)
+    id_slack = Column(Unicode(), unique=False, nullable=True)
     team = Column(Unicode(), unique=False, nullable=True)
     suggestion = Column(Unicode(), unique=False, nullable=True)
     date = Column(DateTime(timezone=True), unique=False, nullable=True)

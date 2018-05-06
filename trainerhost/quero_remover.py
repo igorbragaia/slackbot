@@ -11,7 +11,8 @@ class QueroRemover:
         self.slack_client = slack_client
         self.parser = parser
 
-    def run(self, string_array, channel):
+
+    def run(self, string_array, channel, team, id_slack):
         print("Got IA values")
         string_to_match = self.call_strings_from_db()  # call from db
         print("Call from db")
@@ -40,14 +41,14 @@ class QueroRemover:
                 channel=channel,
                 text=response
             )
-            self.remove_string_from_db(response_str)
+
+            remove_string_from_db(response_str)
+
             print("Removed values to db")
 
     def call_strings_from_db(self):
         return get_unique_offered_trainings()
 
-    def remove_string_from_db(self, deleted_str):
-        remove_string_from_db(deleted_str)
 
     def loop_to_quero_remover(self, command, key_str, best_string):
         if command == "y":

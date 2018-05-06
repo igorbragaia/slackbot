@@ -45,20 +45,20 @@ class TrainerHost:
         """
             Executes bot command if the command is known
         """
+        team = get_user(user_id)
 
-        if not get_user(user_id):
+        if team is None:
             self.slack_client.api_call(
                 "chat.postMessage",
                 channel=channel,
                 text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
             )
             while True:
-                command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                team, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                 print("No loop")
-                if command:
-                    print("Command: ", command)
-                    if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
-                        team = command
+                if team:
+                    print("Command: ", team)
+                    if team == "dev" or team == "parcerias" or team == "rh" or team == "vendas":
                         print("Sai do loop")
                         break
                     else:
@@ -70,6 +70,9 @@ class TrainerHost:
                 time.sleep(Constants.RTM_READ_DELAY)
             print("Vai inserir o usuario ", user_id, " do time ", team, " agora")
             insert_user(user_id, team)
+            print("Usuario inserido")
+
+        print(command)
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \
@@ -78,8 +81,8 @@ class TrainerHost:
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
 
             if command.startswith("treinar"):
-                self.quero_treinar.run(nlp_response[0], channel)
+                self.quero_treinar.run(nlp_response[0], channel, team, user_id)
             elif command.startswith("remover"):
-                self.quero_remover.run(nlp_response[0], channel)
+                self.quero_remover.run(nlp_response[0], channel, team, user_id)
             else:
-                self.quero_treinamento.run(nlp_response[0], channel)
+                self.quero_treinamento.run(nlp_response[0], channel, team, user_id)
