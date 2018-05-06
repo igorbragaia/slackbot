@@ -1,4 +1,3 @@
-import os
 import time
 from slackclient import SlackClient
 from trainerhost.parse_bot_commands import Parser
@@ -7,6 +6,7 @@ from trainerhost.quero_treinar import QueroTreinar
 from trainerhost.quero_treinamento import QueroTreinamento
 from IA.nlp import NLP
 from IA.keys import Keys
+
 
 class TrainerHost:
     RTM_READ_DELAY = Constants.RTM_READ_DELAY
