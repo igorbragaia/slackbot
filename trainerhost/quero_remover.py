@@ -15,6 +15,7 @@ class QueroRemover:
         print("Got IA values")
         string_to_match = self.call_strings_from_db()  # call from db
         print("Call from db")
+        string_array = [string_array[0]]
 
         for key_str in string_array:
             best_string = stringMatch(key_str, list(string_to_match))  # function(key_str, string_to_match)
@@ -24,33 +25,32 @@ class QueroRemover:
                 self.slack_client.api_call(
                     "chat.postMessage",
                     channel=channel,
-                    text="Pode ser treinar " + best_string + "? [Y/n]"
+                    text="Pode ser remover " + best_string + "? [Y/n]"
                 )
                 while True:
                     command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                     if command:
-                        response_str = self.loop_to_quero_treinar_response(command.lower(), key_str,
-                                                                           best_string)
+                        response_str = self.loop_to_quero_remover(command.lower(), key_str,
+                                                                  best_string)
                         break
                     time.sleep(Constants.RTM_READ_DELAY)
 
-            response = "Querer treinar " + response_str + " com sucesso!"
+            response = "Removeu " + response_str + " com sucesso!"
             self.slack_client.api_call(
                 "chat.postMessage",
                 channel=channel,
                 text=response
             )
-            self.add_string_to_quero_treinar_db(response_str)
-            print("Added values to db")
+            self.remove_string_from_db(response_str)
+            print("Removed values to db")
 
     def call_strings_from_db(self):
         return get_unique_offered_trainings()
 
-    def add_string_to_quero_treinar_db(self, new_str):
+    def remove_string_from_db(self, new_str):
         insert_offered_trainings("test", "oiii", new_str)
-        pass
 
-    def loop_to_quero_treinar_response(self, command, key_str, best_string):
+    def loop_to_quero_remover(self, command, key_str, best_string):
         if command == "y":
             response = best_string
         else:

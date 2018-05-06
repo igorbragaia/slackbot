@@ -49,6 +49,12 @@ def insert_offered_trainings(user, team, suggestion):
     session.close()
 
 
+def remove_string_from_db(text):
+    session = SQLManager().get_session()
+
+    session.close()
+
+
 def insert_user(id_slack, user, team):
     session = SQLManager().get_session()
     user = User(id_slack, user, team)
