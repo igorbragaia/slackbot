@@ -1,7 +1,7 @@
 import time
 from trainerhost.constants import Constants
 from db.operations import *
-
+from IA.stringMatching import stringMatch
 
 class QueroTreinar:
     RTM_READ_DELAY = Constants.RTM_READ_DELAY
@@ -15,7 +15,7 @@ class QueroTreinar:
         string_to_match = self.call_strings_from_db()  # call from db
 
         for key_str in string_array:
-            best_string = ""  # function(key_str, string_to_match)
+            best_string = stringMatch(key_str, string_to_match)  # function(key_str, string_to_match)
             if best_string.lower() == key_str.lower() or best_string == "":
                 response_str = key_str
             else:
