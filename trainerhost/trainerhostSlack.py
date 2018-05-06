@@ -5,6 +5,8 @@ from trainerhost.constants import Constants
 from trainerhost.quero_treinar import QueroTreinar
 from trainerhost.quero_treinamento import QueroTreinamento
 from trainerhost.quero_remover import QueroRemover
+from trainerhost.quero_ver import QueroVer
+from trainerhost.quero_help import QueroHelp
 from IA.nlp import NLP
 from IA.keys import Keys
 from db.operations import *
@@ -27,6 +29,8 @@ class TrainerHost:
             self.quero_treinar = QueroTreinar(self.slack_client, self.parser)
             self.quero_treinamento = QueroTreinamento(self.slack_client, self.parser)
             self.quero_remover = QueroRemover(self.slack_client, self.parser)
+            self.quero_ver = QueroVer(self.slack_client, self.parser)
+            self.quero_help = QueroHelp(self.slack_client, self.parser)
 
             while True:
                 command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
@@ -57,15 +61,18 @@ class TrainerHost:
                 self.quero_treinar.run(nlp_response[0], channel)
             elif command.startswith("remover"):
                 self.quero_remover.run(nlp_response[0], channel)
-            elif command.startswith("ver"):
-                self.quero_remover.run(nlp_response[0], channel)
             else:
                 self.quero_treinamento.run(nlp_response[0], channel)
         else:
-            # Default response is help text for the user
-            default_response = "Comando Invalido. Tente <treinar> ou <treinamento>."
-            self.slack_client.api_call(
-                "chat.postMessage",
-                channel=channel,
-                text=default_response
-            )
+            if command.startswith("ver"):
+                self.quero_ver.run(channel)
+            elif command.startswith("help"):
+                self.quero_help.run(channel)
+            else:
+                # Default response is help text for the user
+                response = "Comando Invalido. Tente <treinar> ou <treinamento>."
+                self.slack_client.api_call(
+                    "chat.postMessage",
+                    channel=channel,
+                    text=response
+                )
