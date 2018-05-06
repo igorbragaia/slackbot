@@ -13,7 +13,7 @@ class TrainerHost:
 
     def __init__(self):
         # instantiate Slack client
-        self.slack_client = SlackClient(environ['SLACK_BOT_TOKEN'])
+        self.slack_client = SlackClient('xoxb-358908890179-nTfj1iPK2QvTbQw9JkxR5YkZ')
         # starterbot's user ID in Slack: value is assigned after the bot starts up
         self.starterbot_id = None
 
