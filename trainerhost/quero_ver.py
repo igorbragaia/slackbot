@@ -1,5 +1,6 @@
 from trainerhost.constants import Constants
 from db.operations import *
+import operator
 
 
 class QueroVer:
@@ -14,14 +15,14 @@ class QueroVer:
         unique_offered = get_unique_offered_trainings_with_quantity()
 
         response = "Offered Courses: \n"
-        unique_offered = sorted(unique_offered)
+        unique_offered = sorted(unique_offered.items(), key=operator.itemgetter(1), reverse=True)
 
-        for key, values in unique_offered.items():
+        for key, values in unique_offered:
             response += "  " + str(key) + ": " + str(values) + "\n"
 
         response += "\nRequested Courses: \n"
-        unique_requested = sorted(unique_requested)
-        for key, values in unique_requested.items():
+        unique_requested = sorted(unique_requested.items(), key=operator.itemgetter(1), reverse=True)
+        for key, values in unique_requested:
             response += "  " + str(key) + ": " + str(values) + "\n"
 
         self.slack_client.api_call(

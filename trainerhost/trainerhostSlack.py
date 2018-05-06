@@ -36,6 +36,8 @@ class TrainerHost:
         #     user="UAK3Y6QNR"
         # )
 
+
+
         if self.slack_client.rtm_connect(with_team_state=False):
             print("Starter Bot connected and running!")
             # Read bot's user ID by calling Web API method `auth.test`
@@ -121,10 +123,11 @@ class TrainerHost:
 
             if command.startswith("treinar"):
                 print(nlp_response[0])
+                token = "xoxp-178369105184-359986961751-359058933699-b7957c2fb0f4a3ea73a56b31fed8f49f"
                 new_channel = self.slack_client.api_call(
                     "channels.create",
                     name=nlp_response[0][0] + " class",
-                    token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                    token=token,
                 )
                 channel_id = new_channel["channel"]["id"]
 
@@ -134,14 +137,14 @@ class TrainerHost:
                 for id in x:
                     self.slack_client.api_call(
                         "channels.invite",
-                        token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                        token=token,
                         channel=channel_id,
                         user=id
                     )
 
                 self.slack_client.api_call(
                     "channels.invite",
-                    token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                    token=token,
                     channel=channel_id,
                     user=user_id
                 )
