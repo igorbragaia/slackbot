@@ -47,8 +47,7 @@ class QueroTreinar:
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return ["espanhol, lideranca, culinaria, vendas, typescript, ingles, elixir, ux, "
-                "excel, angular, vue, pitch, react"]
+        return ["espanhol", "lideranca", "culinaria", "vendas", "typescript", "ingles", "elixir", "ux", "excel", "angular", "vue", "pitch", "react"]
 
 
     def loop_to_quero_treinar_response(self, command, key_str, best_string):

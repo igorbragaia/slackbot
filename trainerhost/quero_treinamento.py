@@ -17,7 +17,7 @@ class QueroTreinamento:
         print("Call from db")
         # string_to_match = []
         for key_str in string_array:
-            best_string = string_match(key_str, list(string_to_match))  # function(key_str, string_to_match)
+            best_string = string_match(key_str, string_to_match)  # function(key_str, string_to_match)
             if best_string.lower() == key_str.lower() or best_string == "":
                 response_str = key_str
             else:
@@ -46,10 +46,9 @@ class QueroTreinamento:
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return ["vue, pitch, espanhol, react, ingles, lideranca, pointer, elixir, angular"]
+        return ["vue", "pitch", "espanhol", "react", "ingles", "lideranca", "pointer", "elixir", "angular"]
 
     def loop_to_quero_treinamento_response(self, command, key_str, best_string):
-        response = ""
         if command == "y":
             response = best_string
         else:

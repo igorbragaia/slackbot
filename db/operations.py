@@ -90,8 +90,12 @@ def remove_offered_training(id_slack, suggestion):
     if response is not None:
         session.delete(response)
         session.commit()
-    session.close()
 
+    response = session.query(RequestedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
+    if response is not None:
+        session.delete(response)
+        session.commit()
+    session.close()
 
 def insert_user(id_slack, team):
     session = SQLManager().get_session()
