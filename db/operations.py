@@ -77,8 +77,7 @@ if __name__ == '__main__':
     # x = get_offered_trainings()
     # x = get_suggested_trainings()
 
-
-    insert_user("123121x", "igor", "dev")
+    # insert_user("csd3", "igor", "dev")
     from pprint import pprint
     x = get_user("123121x")
     pprint(x)
