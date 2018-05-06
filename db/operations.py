@@ -97,6 +97,7 @@ def remove_offered_training(id_slack, suggestion):
         session.commit()
     session.close()
 
+
 def insert_user(id_slack, team):
     session = SQLManager().get_session()
     user = User(id_slack, team)

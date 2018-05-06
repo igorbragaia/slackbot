@@ -13,7 +13,7 @@ def string_match(search_word, data_words):
 
     if len(similarity) == 0 or max(similarity) == 1:
         return search_word
-    elif max(similarity) > 0.35:
+    elif max(similarity) > 0.75:
         return data_words[similarity.index(max(similarity))]
     else:
         return ''
