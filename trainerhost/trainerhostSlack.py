@@ -21,6 +21,23 @@ class TrainerHost:
         # starterbot's user ID in Slack: value is assigned after the bot starts up
         self.starterbot_id = None
 
+        from pprint import pprint
+
+        # channel = self.slack_client.api_call(
+        #     "channels.create",
+        #     name="azure15",
+        #     token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+        # )
+        # channel_id = channel["channel"]["id"]
+        # channel = self.slack_client.api_call(
+        #     "channels.invite",
+        #     token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+        #     channel=channel_id,
+        #     user="UAK3Y6QNR"
+        # )
+
+
+
         if self.slack_client.rtm_connect(with_team_state=False):
             print("Starter Bot connected and running!")
             # Read bot's user ID by calling Web API method `auth.test`
@@ -105,6 +122,32 @@ class TrainerHost:
                 insert_user(user_id, team)
 
             if command.startswith("treinar"):
+                print(nlp_response[0])
+                new_channel = self.slack_client.api_call(
+                    "channels.create",
+                    name=nlp_response[0][0] + " class",
+                    token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                )
+                channel_id = new_channel["channel"]["id"]
+
+                x = get_requested_trainings()
+                x = [ item.id_slack for item in x if item.suggestion == nlp_response[0] ]
+
+                for id in x:
+                    self.slack_client.api_call(
+                        "channels.invite",
+                        token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                        channel=channel_id,
+                        user=id
+                    )
+
+                self.slack_client.api_call(
+                    "channels.invite",
+                    token="xoxp-178369105184-359986961751-359132084130-1c5c07fdcf5778f182d25d3c3878a9b8",
+                    channel=channel_id,
+                    user=user_id
+                )
+
                 self.quero_treinar.run(nlp_response[0], channel, team, user_id)
             elif command.startswith("remover"):
                 self.quero_remover.run(nlp_response[0], channel, team, user_id)

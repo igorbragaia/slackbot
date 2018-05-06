@@ -13,18 +13,14 @@ class QueroVer:
         unique_requested = get_unique_requested_trainings_with_quantity()
         unique_offered = get_unique_offered_trainings_with_quantity()
 
-        print("unique_offered: ")
-        print(unique_offered)
-        print("unique_requested: ")
-        print(unique_requested)
-
         response = "Offered Courses: \n"
+        unique_offered = sorted(unique_offered)
 
         for key, values in unique_offered.items():
             response += "  " + str(key) + ": " + str(values) + "\n"
 
         response += "\nRequested Courses: \n"
-
+        unique_requested = sorted(unique_requested)
         for key, values in unique_requested.items():
             response += "  " + str(key) + ": " + str(values) + "\n"
 
