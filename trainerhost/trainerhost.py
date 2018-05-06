@@ -57,7 +57,7 @@ class TrainerHost:
             Executes bot command if the command is known
         """
         # Default response is help text for the user
-        default_response = "Comando Inválido. Tente <quero_treinar> ou <quero_treinamento>."
+        default_response = "Comando Invalido. Tente <quero_treinar> ou <quero_treinamento>."
 
         # Finds and executes the given command, filling in response
         response = None
