@@ -1,4 +1,4 @@
-from trainerhost.trainerhost import TrainerHost
+from trainerhost.trainerhostSlack import TrainerHost
 
 
 if __name__ == "__main__":
