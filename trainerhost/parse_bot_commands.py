@@ -14,9 +14,10 @@ class Parser:
         """
         for event in slack_events:
             if event["type"] == "message" and not "subtype" in event:
+                user_mention_id = event["user"]
                 user_id, message = self.parse_direct_mention(event["text"])
                 if user_id == self.starterbot_id:
-                    return message, event["channel"], user_id
+                    return message, event["channel"], user_mention_id
         return None, None, None
 
     def parse_direct_mention(self, message_text):
