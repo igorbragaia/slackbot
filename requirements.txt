@@ -3,3 +3,4 @@ SQLAlchemy==1.2.0
 slackclient==1.2.1
 websocket-client==0.47.0
 gunicorn
+flask
