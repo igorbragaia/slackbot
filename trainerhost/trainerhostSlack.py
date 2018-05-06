@@ -46,7 +46,7 @@ class TrainerHost:
             Executes bot command if the command is known
         """
         team = get_user(user_id)
-
+        print(user_id)
         if team is None:
             self.slack_client.api_call(
                 "chat.postMessage",

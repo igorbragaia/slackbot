@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-<<<<<<< HEAD
-=======
 from collections import Counter
-
->>>>>>> 1329077de15f79b286f8a3dfb039daac27f2779e
 from db.models import OfferedTraining, RequestedTraining, User
 from db.manager import SQLManager
 from pprint import pprint
@@ -52,7 +48,8 @@ def get_unique_requested_trainings():
 
 def insert_requested_trainings(id_slack, team, suggestion):
     session = SQLManager().get_session()
-    msg = OfferedTraining(id_slack, team, suggestion)
+    print("xx " + id_slack)
+    msg =  RequestedTraining(id_slack, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()
@@ -60,7 +57,7 @@ def insert_requested_trainings(id_slack, team, suggestion):
 
 def insert_offered_trainings(id_slack, team, suggestion):
     session = SQLManager().get_session()
-    msg = RequestedTraining(id_slack, team, suggestion)
+    msg = OfferedTraining(id_slack, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()

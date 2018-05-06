@@ -15,9 +15,9 @@ class OfferedTraining(Base):
     suggestion = Column(Unicode(), unique=False, nullable=True)
     date = Column(DateTime(timezone=True), unique=False, nullable=True)
 
-    def __init__(self, user, team, suggestion):
+    def __init__(self, id_slack, team, suggestion):
         self.date = datetime.utcnow()
-        self.user = user
+        self.id_slack = id_slack
         self.team = team
         self.suggestion = suggestion
 
@@ -34,9 +34,9 @@ class RequestedTraining(Base):
     suggestion = Column(Unicode(), unique=False, nullable=True)
     date = Column(DateTime(timezone=True), unique=False, nullable=True)
 
-    def __init__(self, user, team, suggestion):
+    def __init__(self, id_slack, team, suggestion):
         self.date = datetime.utcnow()
-        self.user = user
+        self.id_slack = id_slack
         self.team = team
         self.suggestion = suggestion
 
