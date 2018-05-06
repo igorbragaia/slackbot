@@ -18,14 +18,14 @@ def get_unique_offered_trainings():
     return unique
 
 
-def get_suggested_trainings():
+def get_requested_trainings():
     session = SQLManager().get_session()
     response = session.query(SuggestedTraining).all()
     session.close()
     return response
 
 
-def get_unique_suggested_trainings():
+def get_unique_requested_trainings():
     session = SQLManager().get_session()
     response = session.query(SuggestedTraining).all()
     session.close()
@@ -33,7 +33,7 @@ def get_unique_suggested_trainings():
     return unique
 
 
-def insert_suggested_trainings(user, team, suggestion):
+def insert_requested_trainings(user, team, suggestion):
     session = SQLManager().get_session()
     msg = OfferedTraining(user, team, suggestion)
     session.add(msg)

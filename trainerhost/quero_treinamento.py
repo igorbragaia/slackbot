@@ -44,10 +44,10 @@ class QueroTreinamento:
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return get_unique_suggested_trainings()
+        return get_unique_requested_trainings()
 
     def add_string_to_quero_treinamento_db(self, new_str):
-        insert_suggested_trainings("test", "nlo", new_str)
+        insert_requested_trainings("test", "nlo", new_str)
         pass
 
     def loop_to_quero_treinamento_response(self, command, key_str, best_string):
