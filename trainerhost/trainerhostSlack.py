@@ -120,18 +120,18 @@ class TrainerHost:
                 insert_user(user_id, team)
 
             if command.startswith("treinar"):
-                print(nlp_response[0])
-                token = "xoxp-178369105184-359986961751-359058933699-b7957c2fb0f4a3ea73a56b31fed8f49f"
-                new_channel = self.slack_client.api_call(
-                    "channels.create",
-                    name=nlp_response[0][0] + " class",
-                    token=token,
-                )
-                channel_id = new_channel["channel"]["id"]
+                # print(nlp_response[0])
+                # token = "xoxp-178369105184-359986961751-359058933699-b7957c2fb0f4a3ea73a56b31fed8f49f"
+                # new_channel = self.slack_client.api_call(
+                #     "channels.create",
+                #     name=nlp_response[0][0] + " class",
+                #     token=token,
+                # )
+                # channel_id = new_channel["channel"]["id"]
 
-                x = get_requested_trainings()
-                x = [ item.id_slack for item in x if item.suggestion == nlp_response[0][0] ]
-                print(x)
+                # x = get_requested_trainings()
+                # x = [ item.id_slack for item in x if item.suggestion == nlp_response[0][0] ]
+                # print(x)
 
                 # for id in x:
                 #     self.slack_client.api_call(
@@ -140,13 +140,13 @@ class TrainerHost:
                 #         channel=channel_id,
                 #         user=id
                 #     )
-
-                self.slack_client.api_call(
-                    "channels.invite",
-                    token=token,
-                    channel=channel_id,
-                    user=user_id
-                )
+                #
+                # self.slack_client.api_call(
+                #     "channels.invite",
+                #     token=token,
+                #     channel=channel_id,
+                #     user=user_id
+                # )
 
                 self.quero_treinar.run(nlp_response[0], channel, team, user_id)
             elif command.startswith("remover"):
