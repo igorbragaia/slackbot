@@ -36,8 +36,6 @@ class TrainerHost:
         #     user="UAK3Y6QNR"
         # )
 
-
-
         if self.slack_client.rtm_connect(with_team_state=False):
             print("Starter Bot connected and running!")
             # Read bot's user ID by calling Web API method `auth.test`
