@@ -65,15 +65,59 @@ class TrainerHost:
         if command.startswith("quero_treinar"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
-            response = nlp_response
+            self.quero_treinar(nlp_response[0], channel)
         elif command.startswith("quero_treinamento"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
-            response = nlp_response
+            self.quero_treinamento(nlp_response[0], channel)
 
-        # Sends the response back to the channel
+    def quero_treinar(self, string_array, channel):
+        string_to_match = ["ruby, C, C#, ruby on rails, python, sql, excel"]  # call from db
+        response = ""
+        for key_str in string_array:
+            best_string = ""  # function(key_str, string_to_match)
+            if best_string.lower() == key_str.lower() or best_string == "":
+                self.add_string_to_quero_treinar_db(key_str)
+                response = "Querer treinar " + key_str + " com sucesso!"
+            else:
+                # Sends the response back to the channel
+                self.slack_client.api_call(
+                    "chat.postMessage",
+                    channel=channel,
+                    text="Pode ser treinar " + best_string + "? [Y/n]"
+                )
+                while True:
+                    command, channel = self.parse_bot_commands(self.slack_client.rtm_read())
+                    if command:
+                        response = self.loop_to_quero_treinar_response(command.lower(), channel,
+                                                            key_str, best_string)
+                        break
+                    time.sleep(self.RTM_READ_DELAY)
+
         self.slack_client.api_call(
             "chat.postMessage",
             channel=channel,
-            text=response or default_response
+            text=response
         )
+
+    def add_string_to_quero_treinar_db(self, new_str):
+        print("String " + new_str + " should be added to the quero_treinar_db")
+        pass
+
+    def loop_to_quero_treinar_response(self, command, channel, key_str, best_string):
+        response = ""
+        if command == "y":
+            response = best_string
+            self.add_string_to_quero_treinar_db(best_string)
+        else:
+            response = key_str
+            self.add_string_to_quero_treinar_db(response)
+
+        return "Querer treinar " + response + " com sucesso!"
+
+    def quero_treinamento(self, string_array, channel):
+        pass
+
+    def add_string_to_quero_treinamento_db(self, new_str):
+        print("String " + new_str + " should be added to the quero_treinamento_db")
+        pass
