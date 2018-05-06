@@ -132,7 +132,8 @@ class TrainerHost:
                 channel_id = new_channel["channel"]["id"]
 
                 x = get_requested_trainings()
-                x = [ item.id_slack for item in x if item.suggestion == nlp_response[0] ]
+                x = [ item.id_slack for item in x if item.suggestion == nlp_response[0][0] ]
+                print(x)
 
                 for id in x:
                     self.slack_client.api_call(

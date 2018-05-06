@@ -1,6 +1,5 @@
 .idea/
 .idea/*
 __pycache__
-IA/keys.py
 venv
 *.pyc
