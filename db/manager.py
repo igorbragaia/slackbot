@@ -16,3 +16,6 @@ class SQLManager:
         DBSession = sessionmaker(bind=self.engine)
         session = DBSession()
         return session
+
+
+SQLManager().create_all_tables()
