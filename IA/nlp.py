@@ -62,7 +62,7 @@ class NLP:
 #   'Ruby on Rails',
 #   'Quero aprender Python3',
 #   'C++ como linguagem',
-#   'Queria aprender liderança, processamento de sinais e análise de dados',
+#   'Queria aprender lideranca, processamento de sinais e analise de dados',
 #   'React Native',
 #   'Elixir Day Quero Educacao'
 # ]
