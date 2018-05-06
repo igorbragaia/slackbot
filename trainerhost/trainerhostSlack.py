@@ -44,17 +44,18 @@ class TrainerHost:
         """
             Executes bot command if the command is known
         """
-        if not found_user:
-            print("Nao conheco esse usuario ", self.slack_client.api_call("auth.test")["user_id"].strip())
-            insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Dev")
-        else:
-            print("Eu jah te conheco!", self.slack_client.api_call("auth.test")["user_id"].strip())
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \
                 command.startswith("remover"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
+
+            if not found_user:
+                print("Nao conheco esse usuario ", self.slack_client.api_call("auth.test")["user_id"].strip())
+                insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Dev")
+            else:
+                print("Eu jah te conheco!", self.slack_client.api_call("auth.test")["user_id"].strip())
 
             if command.startswith("treinar"):
                 self.quero_treinar.run(nlp_response[0], channel)
