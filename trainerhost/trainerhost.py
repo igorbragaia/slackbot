@@ -4,6 +4,7 @@ from slackclient import SlackClient
 from trainerhost.parse_bot_commands import Parser
 from trainerhost.constants import Constants
 from trainerhost.quero_treinar import QueroTreinar
+from trainerhost.quero_treinamento import QueroTreinamento
 from IA.nlp import NLP
 
 
@@ -22,6 +23,7 @@ class TrainerHost:
             self.starterbot_id = self.slack_client.api_call("auth.test")["user_id"]
             self.parser = Parser(self.starterbot_id)
             self.quero_treinar = QueroTreinar(self.slack_client, self.parser)
+            self.quero_treinamento = QueroTreinamento(self.slack_client, self.parser)
 
             while True:
                 command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
@@ -37,14 +39,14 @@ class TrainerHost:
         """
 
         # This is where you start to implement more commands!
-        if command.startswith("quero_treinar"):
+        if command.startswith("quero_treinar") or command.startswith("quero_treinamento"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
-            self.quero_treinar.quero_treinar(nlp_response[0], channel)
-        elif command.startswith("quero_treinamento"):
-            text_minus_first_word = [command.split(' ', 1)[1]]
-            nlp_response = NLP.get_key_phrases(text_minus_first_word)
-            self.quero_treinamento(nlp_response[0], channel)
+
+            if command.startswith("quero_treinar"):
+                self.quero_treinar.run(nlp_response[0], channel)
+            else:
+                self.quero_treinamento.run(nlp_response[0], channel)
         else:
             # Default response is help text for the user
             default_response = "Comando Invalido. Tente <quero_treinar> ou <quero_treinamento>."
@@ -53,10 +55,3 @@ class TrainerHost:
                 channel=channel,
                 text=default_response
             )
-
-    def quero_treinamento(self, string_array, channel):
-        pass
-
-    def add_string_to_quero_treinamento_db(self, new_str):
-        print("String " + new_str + " should be added to the quero_treinamento_db")
-        pass
