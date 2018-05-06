@@ -1,13 +1,31 @@
 <table>
     <thead>
         <tr>
-            <th> user </th>
-            <th> team </th>
-            <th> suggestion </th>
+            <th> requested__user </th>
+            <th> requested__team </th>
+            <th> requested__suggestion </th>
         </tr>
     </thead>
     <tbody>
-        {% for item in trainings %}
+        {% for item in requested_trainings %}
+            <tr>
+                {% for value in item %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<table>
+    <thead>
+        <tr>
+            <th> offered__user </th>
+            <th> offered__team </th>
+            <th> offered__suggestion </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in offered_trainings %}
             <tr>
                 {% for value in item %}
                 <td>{{ value }}</td>
