@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/', methods=['GET','POST'])
 def index():
     trainings = get_offered_trainings()
-    trainings = [[item.id_slack, item.team, item.suggestion] for item in trainings]
+    trainings = [[item.team, item.suggestion] for item in trainings]
     return render_template('index.html', trainings=trainings)
 
 
