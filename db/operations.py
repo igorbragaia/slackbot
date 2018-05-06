@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from db.models import OfferedTraining, SuggestedTraining, User
 from db.manager import SQLManager
-
+from pprint import pprint
 
 def get_offered_trainings():
     session = SQLManager().get_session()
@@ -17,6 +17,39 @@ def get_unique_offered_trainings():
     session.close()
     unique = set([item.suggestion for item in response])
     print("chegou")
+    return unique
+
+
+def get_unique_offered_trainings_with_quantity():
+    session = SQLManager().get_session()
+    response = session.query(OfferedTraining).all()
+    session.close()
+    print("response:")
+    print(response)
+
+    print("list(response):")
+    type(response)
+    type(response[0])
+    print(list(response))
+    l = sorted(list(response))
+    print(l)
+    unique = []
+    count = 0
+    last_val = ""
+
+    for i in range(len(l)):
+        item = l[i]
+        count += 1
+        if last_val == "":
+            last_val = item
+        if item != last_val:
+            last_val = item
+            unique.append({
+                "text": item,
+                "count": count
+            })
+            count = 0
+
     return unique
 
 

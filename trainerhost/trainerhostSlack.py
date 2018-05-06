@@ -35,7 +35,6 @@ class TrainerHost:
             while True:
                 command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                 if command:
-                    print(user_id, " sent a command")
                     self.handle_command(command, channel, get_user(user_id))
                 time.sleep(self.RTM_READ_DELAY)
         else:
@@ -53,7 +52,7 @@ class TrainerHost:
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \
-                command.startswith("remover") or command.startswith("ver"):
+                command.startswith("remover"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
 

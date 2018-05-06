@@ -11,7 +11,7 @@ class QueroVer:
 
     def run(self, channel):
         unique_requested = get_unique_requested_trainings()
-        unique_offered = get_unique_offered_trainings()
+        unique_offered = get_unique_offered_trainings_with_quantity()
 
         print("unique_offered: ")
         print(unique_offered)
