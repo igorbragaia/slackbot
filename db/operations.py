@@ -75,11 +75,21 @@ def get_unique_requested_trainings_with_quantity():
     return cnt
 
 
-def remove_string_from_db(text):
+def remove_string_from_db(id_slack, suggestion):
     session = SQLManager().get_session()
-
+    suggestion = session.query(OfferedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
+    if suggestion is not None:
+        session.delete(suggestion)
+        session.commit()
     session.close()
 
+def remove_offered_training(id_slack, suggestion):
+    session = SQLManager().get_session()
+    suggestion = session.query(OfferedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
+    if suggestion is not None:
+        session.delete(suggestion)
+        session.commit()
+    session.close()
 
 def insert_user(id_slack, team):
     session = SQLManager().get_session()
@@ -112,9 +122,11 @@ if __name__ == '__main__':
     # x = get_offered_trainings()
     # x = get_suggested_trainings()
 
+    remove_string_from_db("UAKV0U9N3", "python3")
+
     # insert_user("csd3", "igor", "dev")
-    from pprint import pprint
-    x = get_user("123121x")
-    pprint(x)
-    x = get_user("x21123")
-    pprint(x)
+    # from pprint import pprint
+    # x = get_user("123121x")
+    # pprint(x)
+    # x = get_user("x21123")
+    # pprint(x)
