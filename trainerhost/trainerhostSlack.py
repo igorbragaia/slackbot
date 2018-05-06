@@ -30,7 +30,6 @@ class TrainerHost:
 
             while True:
                 command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                print("user_id: ", user_id)
                 if command:
                     print(user_id, " sent a command")
                     self.handle_command(command, channel, get_user(user_id))
