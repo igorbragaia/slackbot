@@ -20,7 +20,7 @@ class TrainerHost:
         if self.slack_client.rtm_connect(with_team_state=False):
             print("Starter Bot connected and running!")
             # Read bot's user ID by calling Web API method `auth.test`
-            starterbot_id = self.slack_client.api_call("auth.test")["user_id"]
+            self.starterbot_id = self.slack_client.api_call("auth.test")["user_id"]
             while True:
                 command, channel = self.parse_bot_commands(self.slack_client.rtm_read())
                 if command:
