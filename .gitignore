@@ -1,3 +1,4 @@
 .idea/
 .idea/*
 IA/keys.py
+__pycache__
