@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-from db.models import OfferedTraining, SuggestedTraining, User
+from collections import Counter
+
+from db.models import OfferedTraining, RequestedTraining, User
 from db.manager import SQLManager
 from pprint import pprint
 
@@ -22,45 +24,25 @@ def get_unique_offered_trainings_with_quantity():
     session = SQLManager().get_session()
     response = session.query(OfferedTraining).all()
     session.close()
-    print("response:")
-    print(response)
+    cnt = Counter()
 
-    print("list(response):")
-    type(response)
-    type(response[0])
-    print(list(response))
-    l = sorted(list(response))
-    print(l)
-    unique = []
-    count = 0
-    last_val = ""
+    for item in response:
+        cnt[item] += 1
+    print(cnt)
 
-    for i in range(len(l)):
-        item = l[i]
-        count += 1
-        if last_val == "":
-            last_val = item
-        if item != last_val:
-            last_val = item
-            unique.append({
-                "text": item,
-                "count": count
-            })
-            count = 0
-
-    return list(unique)
+    return cnt
 
 
 def get_requested_trainings():
     session = SQLManager().get_session()
-    response = session.query(SuggestedTraining).all()
+    response = session.query(RequestedTraining).all()
     session.close()
     return response
 
 
 def get_unique_requested_trainings():
     session = SQLManager().get_session()
-    response = session.query(SuggestedTraining).all()
+    response = session.query(RequestedTraining).all()
     session.close()
     unique = set([item.suggestion for item in response])
     return unique
@@ -76,10 +58,23 @@ def insert_requested_trainings(user, team, suggestion):
 
 def insert_offered_trainings(user, team, suggestion):
     session = SQLManager().get_session()
-    msg = SuggestedTraining(user, team, suggestion)
+    msg = RequestedTraining(user, team, suggestion)
     session.add(msg)
     session.commit()
     session.close()
+
+
+def get_unique_requested_trainings_with_quantity():
+    session = SQLManager().get_session()
+    response = session.query(RequestedTraining).all()
+    session.close()
+    cnt = Counter()
+
+    for item in response:
+        cnt[item] += 1
+    print(cnt)
+
+    return cnt
 
 
 def remove_string_from_db(text):

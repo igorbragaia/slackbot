@@ -26,7 +26,7 @@ class OfferedTraining(Base):
         # return "offered training {0} from {1}".format(self.suggestion, self.team)
 
 
-class SuggestedTraining(Base):
+class RequestedTraining(Base):
     __tablename__ = "suggestedtraining"
     id = Column(Integer, primary_key=True)
     user = Column(Unicode(), unique=False, nullable=True)
