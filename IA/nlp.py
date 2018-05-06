@@ -1,11 +1,12 @@
 import requests
 from pprint import pprint
+from IA.keys import Keys
 
 
 class NLP:
     name = 'Text_Categorization'
-    key1 = 'da4c0ff09c204cf09a8fef9ac45d34e5'
-    key2 = '23f5f4d3b03b4cfd83fd74486f544286'
+    key1 = Keys.key1
+    key2 = Keys.key2
     subscription_key = key1
     text_analytics_base_url = 'https://brazilsouth.api.cognitive.microsoft.com/text/analytics/v2.0/'
     key_phrase_api_url = text_analytics_base_url + "keyPhrases"
@@ -63,7 +64,7 @@ class NLP:
 #   'C++ como linguagem',
 #   'Queria aprender liderança, processamento de sinais e análise de dados',
 #   'React Native',
-#   'Elixir Day Quero Educacao',
+#   'Elixir Day Quero Educacao'
 # ]
 #
 # key_phrases = NLP.get_key_phrases(documents)
