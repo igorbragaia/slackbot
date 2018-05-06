@@ -35,9 +35,16 @@ def insert_offered_training(user, team, suggestion):
 
 if __name__ == '__main__':
     insert_suggested_training("Igor Bragaia", "c#", "devops")
+    insert_suggested_training("Igor sdfsd", "c#", "dev")
+    insert_suggested_training("sd Braffadsfadgaia", "excel", "mkt")
+    insert_suggested_training("sd Braffadsfadgaia", "excel", "mkt")
+    insert_suggested_training("sd Braffadsfadgaia", "excel", "mkt")
+    insert_suggested_training("qq Bfaragaia", "excel", "devops")
+    insert_suggested_training("fdas Bragaia", "c#", "devops")
+    insert_suggested_training("kk Bragaia", "c++", "dev")
     insert_offered_training("Igor Bragaia", "c#", "devops")
-    x = get_offered_trainings()
-    x = get_suggested_trainings()
+    # x = get_offered_trainings()
+    # x = get_suggested_trainings()
 
-    from pprint import pprint
-    pprint(x)
+    # from pprint import pprint
+    # pprint(x)
