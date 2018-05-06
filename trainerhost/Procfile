@@ -1,1 +1,1 @@
-python trainerhost.py 
+web: python trainerhost.py 
