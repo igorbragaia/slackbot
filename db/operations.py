@@ -49,7 +49,6 @@ def get_unique_requested_trainings():
 
 def insert_requested_trainings(id_slack, team, suggestion):
     session = SQLManager().get_session()
-    print("xx " + id_slack)
     msg =  RequestedTraining(id_slack, team, suggestion)
     session.add(msg)
     session.commit()
@@ -87,9 +86,9 @@ def remove_string_from_db(id_slack, suggestion):
 
 def remove_offered_training(id_slack, suggestion):
     session = SQLManager().get_session()
-    suggestion = session.query(OfferedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
-    if suggestion is not None:
-        session.delete(suggestion)
+    response = session.query(OfferedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
+    if response is not None:
+        session.delete(response)
         session.commit()
     session.close()
 

@@ -33,7 +33,7 @@ class QueroTreinar:
                         break
                     time.sleep(Constants.RTM_READ_DELAY)
 
-            response = "Querer treinar " + response_str + " com sucesso!"
+            response = "Desejo de treinamento de " + response_str + " registrado com sucesso!"
             self.slack_client.api_call(
                 "chat.postMessage",
                 channel=channel,
