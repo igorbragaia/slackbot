@@ -67,7 +67,10 @@ def get_user(id_slack):
     session = SQLManager().get_session()
     response = session.query(User).filter_by(id_slack=id_slack).first()
     session.close()
-    return response
+    if response is None:
+        return False
+    else:
+        return True
 
 
 if __name__ == '__main__':

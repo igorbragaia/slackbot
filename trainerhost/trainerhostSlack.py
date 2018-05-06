@@ -7,6 +7,7 @@ from trainerhost.quero_treinamento import QueroTreinamento
 from trainerhost.quero_remover import QueroRemover
 from IA.nlp import NLP
 from IA.keys import Keys
+from db.operations import *
 
 
 class TrainerHost:
@@ -28,17 +29,24 @@ class TrainerHost:
             self.quero_remover = QueroRemover(self.slack_client, self.parser)
 
             while True:
-                command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                print("user_id: ", user_id)
                 if command:
-                    self.handle_command(command, channel)
+                    print(user_id, " sent a command")
+                    self.handle_command(command, channel, get_user(user_id))
                 time.sleep(self.RTM_READ_DELAY)
         else:
             print("Connection failed. Exception traceback printed above.")
 
-    def handle_command(self, command, channel):
+    def handle_command(self, command, channel, found_user):
         """
             Executes bot command if the command is known
         """
+        if not found_user:
+            print("Nao conheco esse usuario ", self.slack_client.api_call("auth.test")["user_id"].strip())
+            insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Eric", "Dev")
+        else:
+            print("Eu jah te conheco!", self.slack_client.api_call("auth.test")["user_id"].strip())
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \

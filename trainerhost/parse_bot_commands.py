@@ -16,8 +16,8 @@ class Parser:
             if event["type"] == "message" and not "subtype" in event:
                 user_id, message = self.parse_direct_mention(event["text"])
                 if user_id == self.starterbot_id:
-                    return message, event["channel"]
-        return None, None
+                    return message, event["channel"], user_id
+        return None, None, None
 
     def parse_direct_mention(self, message_text):
         """
