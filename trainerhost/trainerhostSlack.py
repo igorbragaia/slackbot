@@ -133,13 +133,13 @@ class TrainerHost:
                 x = [ item.id_slack for item in x if item.suggestion == nlp_response[0][0] ]
                 print(x)
 
-                for id in x:
-                    self.slack_client.api_call(
-                        "channels.invite",
-                        token=token,
-                        channel=channel_id,
-                        user=id
-                    )
+                # for id in x:
+                #     self.slack_client.api_call(
+                #         "channels.invite",
+                #         token=token,
+                #         channel=channel_id,
+                #         user=id
+                #     )
 
                 self.slack_client.api_call(
                     "channels.invite",
