@@ -1,4 +1,4 @@
-import os
+from os import environ
 import time
 import re
 from slackclient import SlackClient
@@ -13,7 +13,7 @@ class TrainerHost:
 
     def __init__(self):
         # instantiate Slack client
-        self.slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+        self.slack_client = SlackClient(environ['SLACK_BOT_TOKEN'])
         # starterbot's user ID in Slack: value is assigned after the bot starts up
         self.starterbot_id = None
 
