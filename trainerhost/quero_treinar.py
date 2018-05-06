@@ -11,7 +11,7 @@ class QueroTreinar:
         self.parser = parser
 
     def run(self, string_array, channel):
-        string_to_match = ["ruby, C, C#, ruby on rails, python, sql, excel"]  # call from db
+        string_to_match = self.call_strings_from_db()  # call from db
         response = ""
         for key_str in string_array:
             best_string = ""  # function(key_str, string_to_match)
@@ -37,6 +37,9 @@ class QueroTreinar:
             channel=channel,
             text=response
         )
+
+    def call_strings_from_db(self):
+        return ["ruby, C, C#, ruby on rails, python, sql, excel"]
 
     def add_string_to_quero_treinar_db(self, new_str):
         print("String " + new_str + " should be added to the quero_treinar_db")
