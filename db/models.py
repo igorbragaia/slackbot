@@ -46,7 +46,7 @@ class SuggestedTraining(Base):
 class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
-    id_slack = Column(Unicode(), unique=True, nullable=True)
+    id_slack = Column(Unicode(), unique=False, nullable=True)
     user = Column(Unicode(), unique=False, nullable=True)
     team = Column(Unicode(), unique=False, nullable=True)
 
