@@ -42,13 +42,15 @@ class TrainerHost:
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \
-                command.startswith("remover"):
+                command.startswith("remover") or command.startswith("ver"):
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
 
             if command.startswith("treinar"):
                 self.quero_treinar.run(nlp_response[0], channel)
             elif command.startswith("remover"):
+                self.quero_remover.run(nlp_response[0], channel)
+            elif command.startswith("ver"):
                 self.quero_remover.run(nlp_response[0], channel)
             else:
                 self.quero_treinamento.run(nlp_response[0], channel)

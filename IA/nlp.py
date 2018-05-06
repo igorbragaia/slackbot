@@ -17,6 +17,7 @@ class NLP:
 
     @classmethod
     def get_key_phrases(cls, data):
+        return data
         documents = {'documents': []}
 
         for text in data:
