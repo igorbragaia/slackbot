@@ -2,8 +2,8 @@ from os import environ
 import time
 import re
 from slackclient import SlackClient
-from pprint import pprint
-from IA.nlp import NLP
+#from pprint import pprint
+#from IA.nlp import NLP
 
 
 class TrainerHost:
