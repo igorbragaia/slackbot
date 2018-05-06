@@ -13,8 +13,7 @@ class QueroTreinamento:
 
     def run(self, string_array, channel, team, id_slack):
         print("Got IA values")
-        # string_to_match = self.call_strings_from_db()  # call from db
-        string_to_match = []
+        string_to_match = self.call_strings_from_db()  # call from db
         print("Call from db")
 
         for key_str in string_array:
@@ -47,7 +46,7 @@ class QueroTreinamento:
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return get_unique_requested_trainings()
+        return ["vue, pitch, espanhol, react, ingles, lideranca, pointer, elixir, angular"]
 
     def loop_to_quero_treinamento_response(self, command, key_str, best_string):
         response = ""

@@ -13,8 +13,7 @@ class QueroTreinar:
 
 
     def run(self, string_array, channel, team, id_slack):
-        string_to_match = []
-        # string_to_match = self.call_strings_from_db()  # call from db
+        string_to_match = self.call_strings_from_db()  # call from db
 
         for key_str in string_array:
             best_string = string_match(key_str, list(string_to_match))  # function(key_str, string_to_match)
@@ -46,7 +45,8 @@ class QueroTreinar:
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return get_unique_offered_trainings()
+        return ["espanhol, lideranca, culinaria, vendas, typescript, ingles, elixir, ux, "
+                "excel, angular, vue, pitch, react"]
 
 
     def loop_to_quero_treinar_response(self, command, key_str, best_string):
