@@ -1,5 +1,6 @@
 import time
 from trainerhost.constants import Constants
+from db.operations import *
 
 
 class QueroTreinar:
@@ -39,10 +40,11 @@ class QueroTreinar:
         )
 
     def call_strings_from_db(self):
-        return ["ruby, C, C#, ruby on rails, python, sql, excel"]
+        return get_unique_offered_trainings()
 
     def add_string_to_quero_treinar_db(self, new_str):
         print("String " + new_str + " should be added to the quero_treinar_db")
+        insert_offered_trainings("test", "oiii", new_str)
         pass
 
     def loop_to_quero_treinar_response(self, command, key_str, best_string):

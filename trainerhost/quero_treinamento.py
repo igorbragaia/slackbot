@@ -10,10 +10,11 @@ class QueroTreinamento:
         self.slack_client = slack_client
         self.parser = parser
 
-    def run(self, string_array, channel):
+    def run(self, key_strs, channel):
         string_to_match = self.call_strings_from_db()  # call from db
+        print(string_to_match)
         response = ""
-        for key_str in string_array:
+        for key_str in key_strs:
             best_string = ""  # function(key_str, string_to_match)
             if best_string.lower() == key_str.lower() or best_string == "":
                 self.add_string_to_quero_treinamento_db(key_str)
@@ -39,10 +40,11 @@ class QueroTreinamento:
         )
 
     def call_strings_from_db(self):
-        return ["ruby, C, C#, ruby on rails, python, sql, excel"]
+        return get_unique_suggested_trainings()
 
     def add_string_to_quero_treinamento_db(self, new_str):
         print("String " + new_str + " should be added to the quero_treinamento_db")
+        insert_suggested_trainings("test", "nlo", new_str)
         pass
 
     def loop_to_quero_treinamento_response(self, command, key_str, best_string):
