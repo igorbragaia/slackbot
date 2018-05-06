@@ -51,11 +51,10 @@ class TrainerHost:
             self.slack_client.api_call(
                 "chat.postMessage",
                 channel=channel,
-                text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
+                text="Olá usuário! Não lhe conheço, mas quero ser seu amigo! Me conte mais sobre você: Qual o seu setor? (dev/parcerias/rh/vendas)"
             )
             while True:
                 team, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                print("No loop")
                 if team:
                     print("Command: ", team)
                     if team == "dev" or team == "parcerias" or team == "rh" or team == "vendas":
@@ -65,7 +64,7 @@ class TrainerHost:
                         self.slack_client.api_call(
                             "chat.postMessage",
                             channel=channel,
-                            text="Desculpa, nao reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
+                            text="Desculpa, não reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
                         )
                 time.sleep(Constants.RTM_READ_DELAY)
             print("Vai inserir o usuario ", user_id, " do time ", team, " agora")
@@ -85,11 +84,10 @@ class TrainerHost:
                 self.slack_client.api_call(
                     "chat.postMessage",
                     channel=channel,
-                    text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
+                    text="Olá usuário! Não lhe conheço, mas quero ser seu amigo! Me conte mais sobre você: Qual o seu setor? (dev/parcerias/rh/vendas)"
                 )
                 while True:
                     command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                    print("No loop")
                     if command:
                         print("Command: ", command)
                         if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
@@ -100,10 +98,10 @@ class TrainerHost:
                             self.slack_client.api_call(
                                 "chat.postMessage",
                                 channel=channel,
-                                text="Desculpa, nao reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
+                                text="Desculpa, não reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
                             )
                     time.sleep(Constants.RTM_READ_DELAY)
-                print("Vai inserir o usuario agora")
+                print("Vai inserir o usuário agora")
                 insert_user(user_id, team)
 
             if command.startswith("treinar"):
@@ -119,7 +117,7 @@ class TrainerHost:
                 self.quero_help.run(channel)
             else:
                 # Default response is help text for the user
-                response = "Comando Invalido. Tente <treinar> ou <treinamento>."
+                response = "Comando Inválido. Veja \"@quero_help help\" para ver todos os comandos disponíveis."
                 self.slack_client.api_call(
                     "chat.postMessage",
                     channel=channel,

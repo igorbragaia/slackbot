@@ -4,6 +4,7 @@ from db.models import OfferedTraining, RequestedTraining, User
 from db.manager import SQLManager
 from pprint import pprint
 
+
 def get_offered_trainings():
     session = SQLManager().get_session()
     response = session.query(OfferedTraining).all()

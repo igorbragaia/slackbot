@@ -33,4 +33,3 @@ class QueroVer:
             channel=channel,
             text=response
         )
-        print("Data has been saw")
