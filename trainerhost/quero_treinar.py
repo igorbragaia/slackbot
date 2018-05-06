@@ -27,7 +27,7 @@ class QueroTreinar:
                     text="Pode ser treinar " + best_string + "? [Y/n]"
                 )
                 while True:
-                    command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                    command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                     if command:
                         response_str = self.loop_to_quero_treinar_response(command.lower(), key_str,
                                                                            best_string)
