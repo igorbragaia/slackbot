@@ -15,7 +15,7 @@ class QueroTreinamento:
         print("Got IA values")
         string_to_match = self.call_strings_from_db()  # call from db
         print("Call from db")
-
+        # string_to_match = []
         for key_str in string_array:
             best_string = string_match(key_str, list(string_to_match))  # function(key_str, string_to_match)
             if best_string.lower() == key_str.lower() or best_string == "":
