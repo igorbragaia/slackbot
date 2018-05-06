@@ -43,3 +43,17 @@ class SuggestedTraining(Base):
         return "suggested training {0} from {1}".format(self.suggestion, self.team)
 
 
+class User(Base):
+    __tablename__ = "user"
+    id = Column(Integer, primary_key=True)
+    id_slack = Column(Unicode(), unique=True, nullable=True)
+    user = Column(Unicode(), unique=False, nullable=True)
+    team = Column(Unicode(), unique=False, nullable=True)
+
+    def __init__(self, id_slack, user, team):
+        self.id_slack = id_slack
+        self.user = user
+        self.team = team
+
+    def __repr__(self):
+        return "user {0}, team {1}".format(self.user, self.team)

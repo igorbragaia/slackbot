@@ -18,4 +18,5 @@ class SQLManager:
         return session
 
 
-SQLManager().create_all_tables()
+if __name__ == '__main__':
+    SQLManager().create_all_tables()
