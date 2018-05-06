@@ -84,6 +84,7 @@ def remove_string_from_db(id_slack, suggestion):
         session.commit()
     session.close()
 
+
 def remove_offered_training(id_slack, suggestion):
     session = SQLManager().get_session()
     suggestion = session.query(OfferedTraining).filter_by(id_slack=id_slack, suggestion=suggestion).first()
@@ -91,6 +92,7 @@ def remove_offered_training(id_slack, suggestion):
         session.delete(suggestion)
         session.commit()
     session.close()
+
 
 def insert_user(id_slack, team):
     session = SQLManager().get_session()

@@ -40,16 +40,14 @@ class QueroRemover:
                 channel=channel,
                 text=response
             )
-
+            print(response_str)
             remove_offered_training(id_slack, response_str)
 
             print("Removed values to db")
 
-    @staticmethod
     def call_strings_from_db(self):
         return get_unique_offered_trainings()
 
-    @staticmethod
     def loop_to_quero_remover(self, command, key_str, best_string):
         if command == "y":
             response = best_string
