@@ -13,7 +13,7 @@ class TrainerHost:
 
     def __init__(self):
         # instantiate Slack client
-        self.slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
+        self.slack_client = SlackClient('xoxb-358908890179-GlArK9QbFmMEGxJueOKRoBaf')
         # starterbot's user ID in Slack: value is assigned after the bot starts up
         self.starterbot_id = None
 
@@ -28,6 +28,7 @@ class TrainerHost:
             while True:
                 command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                 if command:
+                    print("The user id is ", self.slack_client)
                     self.handle_command(command, channel)
                 time.sleep(self.RTM_READ_DELAY)
         else:
