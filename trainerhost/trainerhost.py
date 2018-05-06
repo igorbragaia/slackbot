@@ -28,7 +28,6 @@ class TrainerHost:
             while True:
                 command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                 if command:
-                    print("The user id is ", self.slack_client)
                     self.handle_command(command, channel)
                 time.sleep(self.RTM_READ_DELAY)
         else:

@@ -11,7 +11,7 @@ class QueroTreinamento:
         self.parser = parser
 
     def run(self, string_array, channel):
-        print(string_array)
+        print("Got IA values")
         string_to_match = self.call_strings_from_db()  # call from db
 
         for key_str in string_array:
@@ -32,19 +32,20 @@ class QueroTreinamento:
                         break
                     time.sleep(self.parser.RTM_READ_DELAY)
 
-        response = "Querer treinar " + response_str + " com sucesso!"
-        self.slack_client.api_call(
-            "chat.postMessage",
-            channel=channel,
-            text=response
-        )
-        self.add_string_to_quero_treinamento_db(response_str)
+            response = "Querer treinar " + response_str + " com sucesso!"
+            self.slack_client.api_call(
+                "chat.postMessage",
+                channel=channel,
+                text=response
+            )
+            print("Call from db")
+            self.add_string_to_quero_treinamento_db(response_str)
+            print("Added values to db")
 
     def call_strings_from_db(self):
         return get_unique_suggested_trainings()
 
     def add_string_to_quero_treinamento_db(self, new_str):
-        print("String " + new_str + " should be added to the quero_treinamento_db")
         insert_suggested_trainings("test", "nlo", new_str)
         pass
 
