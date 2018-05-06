@@ -20,3 +20,4 @@ class SQLManager:
 
 if __name__ == '__main__':
     SQLManager().create_all_tables()
+

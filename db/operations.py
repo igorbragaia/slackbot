@@ -10,6 +10,14 @@ def get_offered_trainings():
     return response
 
 
+def get_unique_offered_trainings():
+    session = SQLManager().get_session()
+    response = session.query(OfferedTraining).all()
+    session.close()
+    unique = set([item.suggestion for item in response])
+    return unique
+
+
 def get_suggested_trainings():
     session = SQLManager().get_session()
     response = session.query(SuggestedTraining).all()
@@ -17,7 +25,15 @@ def get_suggested_trainings():
     return response
 
 
-def insert_suggested_training(user, team, suggestion):
+def get_unique_suggested_trainings():
+    session = SQLManager().get_session()
+    response = session.query(SuggestedTraining).all()
+    session.close()
+    unique = set([item.suggestion for item in response])
+    return unique
+
+
+def insert_suggested_trainings(user, team, suggestion):
     session = SQLManager().get_session()
     msg = OfferedTraining(user, team, suggestion)
     session.add(msg)
@@ -25,7 +41,7 @@ def insert_suggested_training(user, team, suggestion):
     session.close()
 
 
-def insert_offered_training(user, team, suggestion):
+def insert_offered_trainings(user, team, suggestion):
     session = SQLManager().get_session()
     msg = SuggestedTraining(user, team, suggestion)
     session.add(msg)
@@ -60,6 +76,7 @@ if __name__ == '__main__':
     # insert_offered_training("Igor Bragaia", "c#", "devops")
     # x = get_offered_trainings()
     # x = get_suggested_trainings()
+
 
     insert_user("123121x", "igor", "dev")
     from pprint import pprint
