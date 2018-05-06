@@ -11,10 +11,12 @@ def get_offered_trainings():
 
 
 def get_unique_offered_trainings():
+    print("antes")
     session = SQLManager().get_session()
     response = session.query(OfferedTraining).all()
     session.close()
     unique = set([item.suggestion for item in response])
+    print("chegou")
     return unique
 
 

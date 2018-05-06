@@ -5,27 +5,23 @@ def similar(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
 
-def stringMatch(searchWord, dataWords):
-    if (type(dataWords) == str):
-        dataWords = [dataWords]
+def string_match(search_word, data_words):
+    if type(data_words) == str:
+        data_words = [data_words]
 
-    similarity = []
-    for i in range(len(dataWords)):
-        #print(dataWords[i])
-        #print(similar(searchWord, dataWords[i]))
-        similarity.append(similar(searchWord, dataWords[i]))
+    similarity = [similar(search_word, word) for word in data_words]
 
-    if(max(similarity) == 1):
-        return searchWord
-    elif(max(similarity) > 0.35):
-        return dataWords[similarity.index(max(similarity))]
+    if len(similarity) == 0 or max(similarity) == 1:
+        return search_word
+    elif max(similarity) > 0.35:
+        return data_words[similarity.index(max(similarity))]
     else:
         return ''
-        #return "Nenhum resultado encontrado. Deseja iniciar um topico para "+ searchWord+ "?"
-    #values.index(max(similarity))
+        # return "Nenhum resultado encontrado. Deseja iniciar um topico para "+ searchWord+ "?"
+    # values.index(max(similarity))
 
 
 if __name__ == "__main__":
     lng = ["ruby", "freaking fair", "c++", "iurbriubirub", "r o r", "ror", "Ruby Sinatra", "raoubi", "iiiiii"]
-    x = stringMatch("c++ eita ruby", lng)
+    x = string_match("c++ eita ruby", lng)
     print(x)
