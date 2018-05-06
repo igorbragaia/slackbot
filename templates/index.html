@@ -1,1 +1,18 @@
-Pseudo Rest API
+<table>
+    <thead>
+        <tr>
+            <th> user </th>
+            <th> team </th>
+            <th> suggestion </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in trainings %}
+            <tr>
+                {% for value in item %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

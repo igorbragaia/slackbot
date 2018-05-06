@@ -6,8 +6,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def index():
-    x = get_offered_trainings()
-    return render_template('index.html')
+    trainings = get_offered_trainings()
+    trainings = [[item.user, item.team, item.suggestion] for item in trainings]
+    return render_template('index.html', trainings=trainings)
 
 if __name__ == '__main__':
     app.run(debug=True)
