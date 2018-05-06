@@ -4,7 +4,7 @@ from db.operations import *
 from IA.stringMatching import stringMatch
 
 
-class QueroTreinamento:
+class QueroRemover:
     RTM_READ_DELAY = Constants.RTM_READ_DELAY
 
     def __init__(self, slack_client, parser):
@@ -24,13 +24,13 @@ class QueroTreinamento:
                 self.slack_client.api_call(
                     "chat.postMessage",
                     channel=channel,
-                    text="Pode ser treinamento de " + best_string + "? [Y/n]"
+                    text="Pode ser treinar " + best_string + "? [Y/n]"
                 )
                 while True:
                     command, channel = self.parser.parse_bot_commands(self.slack_client.rtm_read())
                     if command:
-                        response_str = self.loop_to_quero_treinamento_response(command.lower(), key_str,
-                                                                               best_string)
+                        response_str = self.loop_to_quero_treinar_response(command.lower(), key_str,
+                                                                           best_string)
                         break
                     time.sleep(Constants.RTM_READ_DELAY)
 
@@ -40,18 +40,17 @@ class QueroTreinamento:
                 channel=channel,
                 text=response
             )
-            self.add_string_to_quero_treinamento_db(response_str)
+            self.add_string_to_quero_treinar_db(response_str)
             print("Added values to db")
 
     def call_strings_from_db(self):
-        return get_unique_requested_trainings()
+        return get_unique_offered_trainings()
 
-    def add_string_to_quero_treinamento_db(self, new_str):
-        insert_requested_trainings("test", "nlo", new_str)
+    def add_string_to_quero_treinar_db(self, new_str):
+        insert_offered_trainings("test", "oiii", new_str)
         pass
 
-    def loop_to_quero_treinamento_response(self, command, key_str, best_string):
-        response = ""
+    def loop_to_quero_treinar_response(self, command, key_str, best_string):
         if command == "y":
             response = best_string
         else:

@@ -14,6 +14,7 @@ class QueroTreinar:
     def run(self, string_array, channel):
         print("Got IA values")
         string_to_match = self.call_strings_from_db()  # call from db
+        print("Call from db")
 
         for key_str in string_array:
             best_string = stringMatch(key_str, list(string_to_match))  # function(key_str, string_to_match)
@@ -39,7 +40,6 @@ class QueroTreinar:
                 channel=channel,
                 text=response
             )
-            print("Call from db")
             self.add_string_to_quero_treinar_db(response_str)
             print("Added values to db")
 
