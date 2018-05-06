@@ -48,7 +48,7 @@ def get_unique_offered_trainings_with_quantity():
             })
             count = 0
 
-    return unique
+    return list(unique)
 
 
 def get_requested_trainings():

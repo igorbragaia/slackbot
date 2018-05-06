@@ -45,35 +45,6 @@ class TrainerHost:
         """
             Executes bot command if the command is known
         """
-<<<<<<< caac6679dcad3aa03b23f85d00345fbc2b3f3953
-=======
-
-        if not get_user(user_id):
-            #insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Eric", "Dev")
-            self.slack_client.api_call(
-                "chat.postMessage",
-                channel=channel,
-                text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
-            )
-            while True:
-                command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                print("No loop")
-                if command:
-                    print("Command: ", command)
-                    if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
-                        team = command
-                        print("Sai do loop")
-                        break
-                    else:
-                        self.slack_client.api_call(
-                            "chat.postMessage",
-                            channel=channel,
-                            text="Desculpa, nao reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
-                        )
-                time.sleep(Constants.RTM_READ_DELAY)
-            print("Vai inserir o usuario agora")
-            insert_user(user_id, team)
->>>>>>> Adding logic for knowing user for the first time
 
         # This is where you start to implement more commands!
         if command.startswith("treinar") or command.startswith("treinamento") or \
@@ -81,11 +52,31 @@ class TrainerHost:
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
 
-            if not found_user:
-                print("Nao conheco esse usuario ", self.slack_client.api_call("auth.test")["user_id"].strip())
-                insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Dev")
-            else:
-                print("Eu jah te conheco!", self.slack_client.api_call("auth.test")["user_id"].strip())
+            if not get_user(user_id):
+                # insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Eric", "Dev")
+                self.slack_client.api_call(
+                    "chat.postMessage",
+                    channel=channel,
+                    text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
+                )
+                while True:
+                    command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                    print("No loop")
+                    if command:
+                        print("Command: ", command)
+                        if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
+                            team = command
+                            print("Sai do loop")
+                            break
+                        else:
+                            self.slack_client.api_call(
+                                "chat.postMessage",
+                                channel=channel,
+                                text="Desculpa, nao reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
+                            )
+                    time.sleep(Constants.RTM_READ_DELAY)
+                print("Vai inserir o usuario agora")
+                insert_user(user_id, team)
 
             if command.startswith("treinar"):
                 self.quero_treinar.run(nlp_response[0], channel)
@@ -94,7 +85,6 @@ class TrainerHost:
             else:
                 self.quero_treinamento.run(nlp_response[0], channel)
         else:
-<<<<<<< caac6679dcad3aa03b23f85d00345fbc2b3f3953
             if command.startswith("ver"):
                 self.quero_ver.run(channel)
             elif command.startswith("help"):
@@ -107,14 +97,3 @@ class TrainerHost:
                     channel=channel,
                     text=response
                 )
-=======
-            # Default response is help text for the user
-            default_response = "Comando Invalido. Tente <treinar> ou <treinamento>."
-            self.slack_client.api_call(
-                "chat.postMessage",
-                channel=channel,
-                text=default_response
-            )
-
-
->>>>>>> Adding logic for knowing user for the first time
