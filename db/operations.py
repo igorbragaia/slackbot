@@ -27,8 +27,7 @@ def get_unique_offered_trainings_with_quantity():
     cnt = Counter()
 
     for item in response:
-        cnt[item] += 1
-    print(cnt)
+        cnt[str(item)] += 1
 
     return cnt
 
@@ -71,8 +70,7 @@ def get_unique_requested_trainings_with_quantity():
     cnt = Counter()
 
     for item in response:
-        cnt[item] += 1
-    print(cnt)
+        cnt[str(item)] += 1
 
     return cnt
 

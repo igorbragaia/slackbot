@@ -18,7 +18,16 @@ class QueroVer:
         print("unique_requested: ")
         print(unique_requested)
 
-        response = "Dados: "
+        response = "Offered Courses: \n"
+
+        for key, values in unique_offered.items():
+            response += "  " + str(key) + ": " + str(values) + "\n"
+
+        response += "\nRequested Courses: \n"
+
+        for key, values in unique_requested.items():
+            response += "  " + str(key) + ": " + str(values) + "\n"
+
         self.slack_client.api_call(
             "chat.postMessage",
             channel=channel,

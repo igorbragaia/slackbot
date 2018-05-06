@@ -41,7 +41,8 @@ class RequestedTraining(Base):
         self.suggestion = suggestion
 
     def __repr__(self):
-        return "suggested training {0} from {1}".format(self.suggestion, self.team)
+        return self.suggestion
+        # return "suggested training {0} from {1}".format(self.suggestion, self.team)
 
 
 class User(Base):
