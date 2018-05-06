@@ -80,9 +80,48 @@ class TrainerHost:
             text_minus_first_word = [command.split(' ', 1)[1]]
             nlp_response = NLP.get_key_phrases(text_minus_first_word)
 
+            if not get_user(user_id):
+                # insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Eric", "Dev")
+                self.slack_client.api_call(
+                    "chat.postMessage",
+                    channel=channel,
+                    text="Ola usuario! Nao lhe conheco, mas quero ser seu amigo! Me conte mais sobre voce: Qual o seu setor? (dev/parcerias/rh/vendas)"
+                )
+                while True:
+                    command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
+                    print("No loop")
+                    if command:
+                        print("Command: ", command)
+                        if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
+                            team = command
+                            print("Sai do loop")
+                            break
+                        else:
+                            self.slack_client.api_call(
+                                "chat.postMessage",
+                                channel=channel,
+                                text="Desculpa, nao reconheci seu setor. Lembrando que ele deve ser dev/parcerias/rh/vendas"
+                            )
+                    time.sleep(Constants.RTM_READ_DELAY)
+                print("Vai inserir o usuario agora")
+                insert_user(user_id, team)
+
             if command.startswith("treinar"):
                 self.quero_treinar.run(nlp_response[0], channel, team, user_id)
             elif command.startswith("remover"):
                 self.quero_remover.run(nlp_response[0], channel, team, user_id)
             else:
                 self.quero_treinamento.run(nlp_response[0], channel, team, user_id)
+        else:
+            if command.startswith("ver"):
+                self.quero_ver.run(channel)
+            elif command.startswith("help"):
+                self.quero_help.run(channel)
+            else:
+                # Default response is help text for the user
+                response = "Comando Invalido. Tente <treinar> ou <treinamento>."
+                self.slack_client.api_call(
+                    "chat.postMessage",
+                    channel=channel,
+                    text=response
+                )

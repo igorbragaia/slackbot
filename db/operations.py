@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+<<<<<<< HEAD
+=======
+from collections import Counter
+
+>>>>>>> 1329077de15f79b286f8a3dfb039daac27f2779e
 from db.models import OfferedTraining, RequestedTraining, User
 from db.manager import SQLManager
 from pprint import pprint
@@ -22,33 +27,12 @@ def get_unique_offered_trainings_with_quantity():
     session = SQLManager().get_session()
     response = session.query(OfferedTraining).all()
     session.close()
-    print("response:")
-    print(response)
+    cnt = Counter()
 
-    print("list(response):")
-    type(response)
-    type(response[0])
-    print(list(response))
-    l = sorted(list(response))
-    print(l)
-    unique = []
-    count = 0
-    last_val = ""
+    for item in response:
+        cnt[str(item)] += 1
 
-    for i in range(len(l)):
-        item = l[i]
-        count += 1
-        if last_val == "":
-            last_val = item
-        if item != last_val:
-            last_val = item
-            unique.append({
-                "text": item,
-                "count": count
-            })
-            count = 0
-
-    return unique
+    return cnt
 
 
 def get_requested_trainings():
@@ -80,6 +64,18 @@ def insert_offered_trainings(id_slack, team, suggestion):
     session.add(msg)
     session.commit()
     session.close()
+
+
+def get_unique_requested_trainings_with_quantity():
+    session = SQLManager().get_session()
+    response = session.query(RequestedTraining).all()
+    session.close()
+    cnt = Counter()
+
+    for item in response:
+        cnt[str(item)] += 1
+
+    return cnt
 
 
 def remove_string_from_db(text):
