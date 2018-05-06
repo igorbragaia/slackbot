@@ -5,18 +5,6 @@ from slackclient import SlackClient
 from pprint import pprint
 from IA.nlp import NLP
 
-documents = [
-  'Ruby on Rails',
-  'Quero aprender Python3',
-  'C++ como linguagem',
-  'Queria aprender liderança, processamento de sinais e análise de dados',
-  'React Native',
-  'Elixir Day Quero Educacao'
-]
-
-key_phrases = NLP.get_key_phrases(documents)
-pprint(key_phrases)
-
 
 class TrainerHost:
     # constants
