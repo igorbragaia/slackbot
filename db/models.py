@@ -47,12 +47,10 @@ class User(Base):
     __tablename__ = "user"
     id = Column(Integer, primary_key=True)
     id_slack = Column(Unicode(), unique=False, nullable=True)
-    user = Column(Unicode(), unique=False, nullable=True)
     team = Column(Unicode(), unique=False, nullable=True)
 
-    def __init__(self, id_slack, user, team):
+    def __init__(self, id_slack, team):
         self.id_slack = id_slack
-        self.user = user
         self.team = team
 
     def __repr__(self):

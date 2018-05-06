@@ -55,9 +55,9 @@ def remove_string_from_db(text):
     session.close()
 
 
-def insert_user(id_slack, user, team):
+def insert_user(id_slack, team):
     session = SQLManager().get_session()
-    user = User(id_slack, user, team)
+    user = User(id_slack, team)
     session.add(user)
     session.commit()
     session.close()

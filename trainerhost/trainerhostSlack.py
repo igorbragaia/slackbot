@@ -43,7 +43,7 @@ class TrainerHost:
         """
         if not found_user:
             print("Nao conheco esse usuario ", self.slack_client.api_call("auth.test")["user_id"].strip())
-            insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Eric", "Dev")
+            insert_user(self.slack_client.api_call("auth.test")["user_id"].strip(), "Dev")
         else:
             print("Eu jah te conheco!", self.slack_client.api_call("auth.test")["user_id"].strip())
 
