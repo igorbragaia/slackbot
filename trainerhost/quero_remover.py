@@ -47,8 +47,8 @@ class QueroRemover:
     def call_strings_from_db(self):
         return get_unique_offered_trainings()
 
-    def remove_string_from_db(self, new_str):
-        insert_offered_trainings("test", "oiii", new_str)
+    def remove_string_from_db(self, deleted_str):
+        remove_string_from_db(deleted_str)
 
     def loop_to_quero_remover(self, command, key_str, best_string):
         if command == "y":
