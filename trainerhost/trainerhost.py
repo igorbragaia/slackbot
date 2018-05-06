@@ -29,7 +29,6 @@ class TrainerHost:
         else:
             print("Connection failed. Exception traceback printed above.")
 
-
     def parse_bot_commands(self, slack_events):
         """
             Parses a list of events coming from the Slack RTM API to find bot commands.
@@ -62,13 +61,15 @@ class TrainerHost:
         # Finds and executes the given command, filling in response
         response = None
 
-        aux = command.split(' ', 1)[1]
-
         # This is where you start to implement more commands!
         if command.startswith("quero_treinar"):
-            response = "Entao voce quer dar um treinamento? Que legal da sua parte!"
+            text_minus_first_word = [command.split(' ', 1)[1]]
+            nlp_response = NLP.get_key_phrases(text_minus_first_word)
+            response = nlp_response
         elif command.startswith("quero_treinamento"):
-            response = "Saquei, entao voce quer um treinamento!"
+            text_minus_first_word = [command.split(' ', 1)[1]]
+            nlp_response = NLP.get_key_phrases(text_minus_first_word)
+            response = nlp_response
 
         # Sends the response back to the channel
         self.slack_client.api_call(
