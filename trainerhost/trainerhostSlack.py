@@ -55,7 +55,6 @@ class TrainerHost:
             )
             while True:
                 team, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                print("No loop")
                 if team:
                     print("Command: ", team)
                     if team == "dev" or team == "parcerias" or team == "rh" or team == "vendas":
@@ -89,7 +88,6 @@ class TrainerHost:
                 )
                 while True:
                     command, channel, user_id = self.parser.parse_bot_commands(self.slack_client.rtm_read())
-                    print("No loop")
                     if command:
                         print("Command: ", command)
                         if command == "dev" or command == "parcerias" or command == "rh" or command == "vendas":
