@@ -1,4 +1,4 @@
-## @quero_Help - slackbot developed along Code in Quero Hackathon 2018
+## @quero_help - slackbot developed during 24h Quero Bolsa Hackathon 2018
 
 Use "@quero_help treinamento course-example" to request course-example class  
 Use "@quero_help treinar course-example" to offer course-example class  
@@ -6,7 +6,7 @@ Use "@quero_help ver" to see offered and requested courses
 Use "@quero_help remover course-example" to remove offered course  
 Use "@quero_help help" to see available commands  
 
-Offered and requested courses are stored in PostgreSQL database and connected through Microsoft Power BI dashboards via a RESTful API. Bot and API were deployed on Heroku.
+Offered and requested courses are stored in PostgreSQL database and connected to Microsoft Power BI dashboards through RESTful API. Bot and API were deployed on Heroku.
 
 ### Some Examples
 
